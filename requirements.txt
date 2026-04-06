@@ -1,3 +1,7 @@
 scikit-learn
 pandas
 pyttsx3
+flask
+google-genai
+pydantic>=2.0
+python-dotenv

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCheck — AI Symptom Checker</title>
+    <meta name="description" content="AI-powered symptom checker. Describe your symptoms and receive an instant health assessment with precautions and recommendations.">
+    <meta name="theme-color" content="#F8F9FF">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Liquid Glassmorphism Background -->
+    <div class="medical-bg" aria-hidden="true">
+        <div class="liquid-blob"></div>
+        <div class="liquid-blob"></div>
+        <div class="liquid-blob"></div>
+        
+        <!-- Floating medical plus signs -->
+        <div class="medical-cross" style="top: 15%; left: 10%; width: clamp(20px, 5vw, 40px); height: clamp(20px, 5vw, 40px);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </div>
+        <div class="medical-cross" style="top: 70%; right: 15%; width: clamp(30px, 8vw, 60px); height: clamp(30px, 8vw, 60px);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </div>
+        <div class="medical-cross" style="bottom: 10%; left: 20%; width: clamp(15px, 4vw, 30px); height: clamp(15px, 4vw, 30px);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>HealthCheck</h1>
+                    <span class="logo-subtitle">Medical AI Assistant</span>
+                </div>
+            </div>
+            <div class="header-status">
+                <span class="pulse-dot"></span>
+                AI Active
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Chat Area -->
+    <main class="chat-container" id="chatContainer">
+        <div class="chat-messages" id="chatMessages">
+            <!-- Welcome hero + messages injected by JS -->
+        </div>
+    </main>
+
+    <!-- Input Area -->
+    <footer class="input-area">
+        <div class="input-inner">
+            <div class="input-wrapper" id="inputWrapper">
+                <input
+                    type="text"
+                    id="userInput"
+                    placeholder="Describe your symptom…"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+                <button id="sendBtn" class="send-btn" title="Send">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
+                <!-- Autocomplete dropdown -->
+                <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+            </div>
+            <!-- Yes/No buttons for follow-up (hidden by default) -->
+            <div class="followup-buttons" id="followupButtons" style="display:none;">
+                <button class="btn-yes" id="btnYes">Yes</button>
+                <button class="btn-no" id="btnNo">No</button>
+            </div>
+            <p class="input-disclaimer">For informational purposes only — not a substitute for professional medical advice.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

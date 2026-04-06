@@ -1,0 +1,821 @@
+/* ============================================================
+   HealthCheck — Liquid Glassmorphism (Purple & White)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    /* ── Core Palette ── */
+    --bg-primary:     #F8F9FF;
+    --bg-secondary:   #FFFFFF;
+    --bg-glass:       rgba(255, 255, 255, 0.4);
+    --bg-glass-light: rgba(255, 255, 255, 0.7);
+    --bg-glass-hover: rgba(255, 255, 255, 0.9);
+
+    /* ── Purple Accents ── */
+    --accent-purple:    #8B5CF6;
+    --accent-purple-light: #C4B5FD;
+    --accent-purple-glow: rgba(139, 92, 246, 0.15);
+    --accent-pink:      #EC4899;
+
+    /* ── Medical Colors ── */
+    --medical-plus:     #EF4444;
+    --medical-plus-bg:  rgba(239, 68, 68, 0.1);
+
+    /* ── Gradients ── */
+    --gradient-liquid:  linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+    --gradient-glass:   linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+
+    /* ── Text ── */
+    --text-primary:    #1E293B;
+    --text-secondary:  #475569;
+    --text-muted:      #94A3B8;
+    --text-inverse:    #FFFFFF;
+
+    /* ── Borders ── */
+    --border:          rgba(139, 92, 246, 0.1);
+    --border-hover:    rgba(139, 92, 246, 0.2);
+    --border-glass:    rgba(255, 255, 255, 0.5);
+
+    /* ── Status ── */
+    --danger:          #EF4444;
+    --danger-bg:       rgba(239, 68, 68, 0.05);
+    --success:         #10B981;
+    --success-bg:      rgba(16, 185, 129, 0.05);
+
+    /* ── Effects ── */
+    --shadow-sm:       0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md:       0 4px 12px rgba(139, 92, 246, 0.08);
+    --shadow-lg:       0 10px 25px rgba(139, 92, 246, 0.12);
+    --glass-blur:      blur(20px);
+    --glass-blur-heavy: blur(40px);
+
+    /* ── Radius ── */
+    --radius:          24px;
+    --radius-md:       16px;
+    --radius-sm:       12px;
+    --radius-xs:       8px;
+    --radius-full:     9999px;
+
+    /* ── Typography ── */
+    --font:            'Plus Jakarta Sans', sans-serif;
+
+    /* ── Motion ── */
+    --ease-out:        cubic-bezier(0.23, 1, 0.32, 1);
+    --transition:      all 0.4s var(--ease-out);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================
+   Liquid Background
+   ============================================================ */
+.medical-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+.liquid-blob {
+    position: absolute;
+    width: clamp(300px, 50vw, 600px);
+    height: clamp(300px, 50vw, 600px);
+    background: var(--gradient-liquid);
+    filter: blur(80px);
+    opacity: 0.15;
+    border-radius: 50%;
+    animation: liquid-move 20s infinite alternate var(--ease-out);
+}
+
+.liquid-blob:nth-child(1) { top: -10%; left: -10%; }
+.liquid-blob:nth-child(2) { bottom: -10%; right: -10%; width: 500px; height: 500px; animation-duration: 25s; }
+.liquid-blob:nth-child(3) { top: 40%; left: 50%; width: 400px; height: 400px; opacity: 0.1; animation-duration: 18s; }
+
+@keyframes liquid-move {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(5%, 10%) scale(1.1) rotate(5deg); }
+    66% { transform: translate(-5%, 5%) scale(0.9) rotate(-5deg); }
+    100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+
+.medical-cross {
+    position: absolute;
+    color: var(--accent-purple);
+    opacity: 0.15;
+    z-index: 1;
+    animation: float 10s infinite ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.medical-cross svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.header {
+    height: 80px;
+    padding: 0 40px;
+    background: var(--bg-glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    z-index: 100;
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    background: var(--accent-purple);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 16px var(--accent-purple-glow);
+}
+
+.logo-text h1 {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+@media (max-width: 600px) {
+    .header {
+        padding: 0 16px;
+        height: 64px;
+    }
+    .logo-subtitle {
+        display: none;
+    }
+    .header-status {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+    .chat-container {
+        padding: 24px 16px;
+    }
+    .input-area {
+        padding: 16px 16px 24px;
+    }
+}
+
+.logo-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.header-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    box-shadow: var(--shadow-sm);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    position: relative;
+}
+
+.pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: var(--success);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.4; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* ============================================================
+   Chat Area
+   ============================================================ */
+.chat-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+
+.chat-messages {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: fit-content;
+    max-width: min(85%, 600px);
+    animation: message-in 0.5s var(--ease-out);
+}
+
+@keyframes message-in {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.message-user { align-self: flex-end; }
+.message-bot { align-self: flex-start; }
+
+.message-bubble {
+    padding: 16px 24px;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.message-user .message-bubble {
+    background: var(--accent-purple);
+    color: white;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 10px 20px var(--accent-purple-glow);
+}
+
+.message-bot .message-bubble {
+    background: var(--bg-glass-light);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    color: var(--text-primary);
+    border: 1px solid var(--border-glass);
+    border-bottom-left-radius: 4px;
+    box-shadow: var(--shadow-md);
+}
+
+/* ============================================================
+   Input Area
+   ============================================================ */
+.input-area {
+    padding: 20px 40px 40px;
+}
+
+.input-inner {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.input-wrapper {
+    background: var(--bg-glass-light);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-full);
+    padding: 8px 8px 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition);
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 4px var(--accent-purple-glow);
+    transform: translateY(-2px);
+}
+
+input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-primary);
+    padding: 12px 0;
+}
+
+.send-btn {
+    width: 48px;
+    height: 48px;
+    background: var(--accent-purple);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px var(--accent-purple-glow);
+}
+
+.send-btn:hover {
+    transform: scale(1.1) rotate(-5deg);
+    background: #7c3aed;
+}
+
+/* ============================================================
+   Diagnosis Card
+   ============================================================ */
+.diagnosis-card {
+    background: var(--bg-glass-light);
+    backdrop-filter: var(--glass-blur-heavy);
+    -webkit-backdrop-filter: var(--glass-blur-heavy);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-top: 12px;
+    box-shadow: var(--shadow-lg);
+}
+
+.diagnosis-card h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-purple);
+    margin-bottom: 16px;
+}
+
+.severity-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+}
+
+.severity-badge.serious { background: #FEE2E2; color: #EF4444; }
+.severity-badge.mild { background: #D1FAE5; color: #10B981; }
+
+.precautions-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.precautions-list li {
+    padding: 12px 16px;
+    background: white;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9375rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.precautions-list li::before {
+    content: '+';
+    color: var(--accent-purple);
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+/* ============================================================
+   Autocomplete
+   ============================================================ */
+.autocomplete-dropdown {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+.autocomplete-item {
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9375rem;
+}
+
+.autocomplete-item:hover {
+    background: var(--bg-primary);
+    color: var(--accent-purple);
+    padding-left: 32px;
+}
+
+/* ============================================================
+   Follow-up Buttons
+   ============================================================ */
+.followup-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.followup-buttons button {
+    flex: 1;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.followup-buttons .btn-yes {
+    background: var(--accent-purple);
+    color: white;
+    border: none;
+}
+
+.followup-buttons .btn-yes:hover { transform: translateY(-2px); box-shadow: 0 4px 12px var(--accent-purple-glow); }
+.followup-buttons .btn-no:hover { background: var(--bg-primary); }
+
+/* ============================================================
+   Welcome Hero
+   ============================================================ */
+.welcome-hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    animation: message-in 0.6s var(--ease-out);
+}
+
+.hero-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 28px;
+    background: var(--gradient-liquid);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 32px var(--accent-purple-glow);
+}
+
+.hero-icon svg {
+    width: 36px;
+    height: 36px;
+    color: white;
+}
+
+.welcome-hero h2 {
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.welcome-hero p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+}
+
+/* ── Hero Chips (symptom quick-picks) ── */
+.hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.hero-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--bg-glass-light);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-full);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.hero-chip svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--accent-purple);
+}
+
+.hero-chip:hover {
+    background: var(--accent-purple);
+    color: white;
+    border-color: var(--accent-purple);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--accent-purple-glow);
+}
+
+.hero-chip:hover svg {
+    color: white;
+}
+
+/* ============================================================
+   Message Avatars
+   ============================================================ */
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.message-bot .message-avatar {
+    background: var(--gradient-liquid);
+    color: white;
+}
+
+.message-bot .message-avatar svg {
+    width: 18px;
+    height: 18px;
+    color: white;
+}
+
+.message-user .message-avatar {
+    background: var(--accent-purple-light);
+    color: var(--accent-purple);
+    align-self: flex-end;
+}
+
+/* ============================================================
+   Typing Indicator
+   ============================================================ */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-purple-light);
+    border-radius: 50%;
+    animation: typing-bounce 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: 0s; }
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-8px); opacity: 1; }
+}
+
+/* ============================================================
+   Diagnosis Card — Header & Body
+   ============================================================ */
+.diagnosis-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--gradient-liquid);
+    border-radius: var(--radius) var(--radius) 0 0;
+    margin: -24px -24px 24px -24px;
+    color: white;
+}
+
+.diagnosis-card-header .header-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.diagnosis-card-header .header-icon svg {
+    width: 22px;
+    height: 22px;
+    color: white;
+}
+
+.diagnosis-card-header h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 2px;
+}
+
+.diagnosis-card-header .header-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.diagnosis-card-body {
+    padding: 0;
+}
+
+.disease-name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.diagnosis-section {
+    margin-bottom: 20px;
+}
+
+.diagnosis-section h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.diagnosis-section p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.secondary-hint {
+    padding: 14px 18px;
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    color: #92400E;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.severity-advice {
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.severity-advice.serious {
+    background: var(--danger-bg);
+    color: #B91C1C;
+    border: 1px solid #FECACA;
+}
+
+.severity-advice.mild {
+    background: var(--success-bg);
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+}
+
+.new-chat-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: var(--accent-purple);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 8px 20px var(--accent-purple-glow);
+    margin-top: 8px;
+}
+
+.new-chat-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(139, 92, 246, 0.25);
+}
+
+/* ============================================================
+   Input Disclaimer
+   ============================================================ */
+.input-disclaimer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+}
+
+/* ============================================================
+   Autocomplete Active State
+   ============================================================ */
+.autocomplete-dropdown.show {
+    display: block;
+}
+
+.autocomplete-item.active {
+    background: var(--bg-primary);
+    color: var(--accent-purple);
+    padding-left: 32px;
+}
+
+.autocomplete-item mark {
+    background: var(--accent-purple-glow);
+    color: var(--accent-purple);
+    font-weight: 700;
+    border-radius: 2px;
+    padding: 0 2px;
+}
+
+/* ============================================================
+   Logo Icon SVG sizing fix
+   ============================================================ */
+.logo-icon-wrapper svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* ============================================================
+   Send button SVG sizing
+   ============================================================ */
+.send-btn svg {
+    width: 20px;
+    height: 20px;
+}
