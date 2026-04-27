@@ -1,17 +1,4 @@
-"""
-app.py  —  Healthcare Chatbot (100% Gemini-powered)
-=====================================================
-All diagnostic data — symptom suggestions, disease predictions, descriptions,
-precautions, and severity assessments — comes exclusively from Google Gemini.
-No local CSV datasets are loaded or referenced.
 
-Required packages:
-  pip install flask google-genai python-dotenv
-
-Setup:
-  1. Copy .env (provided) and fill in your GEMINI_API_KEY.
-  2. Run:  python app.py
-"""
 
 import json
 import os
