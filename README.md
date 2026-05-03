@@ -1,94 +1,72 @@
-# 🏥 Healthcare Chatbot
+# 🏥 HealthCheck AI — Intelligent Medical Assistant
 
-## 🎯 Purpose
-
-The Healthcare Chatbot is an intelligent assistant designed to help users identify potential medical conditions based on their symptoms. By engaging in a conversational interface, the application prompts users for symptoms, evaluates the severity and duration, and provides a preliminary medical diagnosis along with descriptions and preventive measures. It serves as a sophisticated first point of reference for health-related queries, though it does not replace professional medical consultation.
-
-## 🛠️ Tech Stack & Requirements
-
-The project is built with Python, emphasizing machine learning and modern generative AI technologies.
-
-- **Backend:** Flask (Python web framework)
-- **Machine Learning & Data Processing:** `scikit-learn`, `pandas`, `numpy`
-- **Generative AI:** `google-genai` (Google Gemini SDK)
-- **Other Utilities:** `python-dotenv` (for loading environment variables), `pyttsx3`, `pydantic`
-- **Frontend:** HTML, CSS (Vanilla Custom Styles), JavaScript
-
-**`requirements.txt`:**
-
-```text
-scikit-learn
-pandas
-pyttsx3
-flask
-google-genai
-pydantic>=2.0
-python-dotenv
-```
-
-## 🧠 Machine Learning Strategies
-
-The project explores different approaches for disease prediction based on patient symptoms:
-
-- **Support Vector Classifier (SVC) — [IN USE]:** The primary traditional machine learning model deployed for accurate pattern recognition in symptom-to-disease mapping. It evaluates a unified input vector of confirmed symptoms to predict the underlying condition robustly.
-- **Decision Tree — [NOT IN USE]:** While implemented code exists in earlier portions, the Decision Tree approach is functionally sidelined in favor of SVC's reliability.
-- **Google Gemini API Integration 🎉:** Moving beyond traditional static datasets, the application integrates **Google Gemini** (via the new `google-genai` SDK) for a fully dynamic, conversational AI flow. In the modern iteration, Gemini intelligently handles:
-  - Smart symptom extraction and fuzzy search matching.
-  - Generating context-aware follow-up symptom questions tailored to the initially reported issue.
-  - Formulating the comprehensive final diagnosis, assessing severity, and advising on detailed precautions.
-
-## ⚙️ Setup Process
-
-Follow these steps to get the project running locally:
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone <repository_url>
-   cd healthcare-chatbot
-   ```
-
-2. **Create a Virtual Environment**
-
-   ```bash
-   python -m venv venv
-   # On Windows:
-   venv\Scripts\activate
-   # On macOS/Linux:
-   source venv/bin/activate
-   ```
-
-3. **Install Dependencies**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Environment Variables Configuration**
-   - Create a `.env` file in the root directory. You can use `.env.example` as a template.
-   - Add your Google Gemini API key:
-
-     ```env
-     GEMINI_API_KEY=your_actual_key_here
-     ```
-
-     *(You can get a free API key at [Google AI Studio](https://aistudio.google.com/app/apikey))*
-
-5. **Run the Application**
-   - To launch the fully AI-driven version:
-
-     ```bash
-     python geminiapp.py
-     ```
-
-   - Alternatively, to launch the traditional ML-based version:
-
-     ```bash
-     python app.py
-     ```
-
-6. **Access the Web App**
-   Open your browser and navigate to `http://localhost:5000`.
+HealthCheck AI is a modern, multilingual healthcare companion designed to provide preliminary medical assessments, analyze medicine labels, and help users locate nearby medical facilities. Combining traditional Machine Learning (SVC) with cutting-edge Generative AI (Google Gemini 2.0), it offers a seamless, mobile-first experience.
 
 ---
-*Disclaimer: This tool is for informational purposes only. In case of a medical emergency or serious symptoms, please consult a qualified healthcare professional immediately.*
+
+## ✨ Key Features
+
+### 💬 Modern Conversational UI
+- **WhatsApp-Inspired Experience**: Clean, bubble-based chat interface with "tails" and smooth animations.
+- **Project-Themed Aesthetics**: A beautiful Emerald and Warm Cream theme with a professional `Doctor-Consultation.jpg` background.
+- **Interactive UX**: Welcome hero with quick-start symptom chips and intelligent autocomplete for over 130+ symptoms.
+
+### 🌍 Global Accessibility (i18n)
+Full native support for multiple languages, including:
+- 🇬🇧 **English** | 🇮🇳 **Hindi** (हिन्दी) | 🇮🇳 **Bengali** (বাংলা)
+- 🇮🇳 **Telugu** (తెలుగు) | 🇮🇳 **Kannada** (ಕನ್ನಡ) | 🇮🇳 **Punjabi** (ਪੰਜਾਬੀ)
+
+### 📸 AI Image Analysis (Exclusive to `geminiapp.py`)
+- **Medicine Scanner**: Upload images of medicine strips or bottles to extract:
+  - Manufacturer, MFG/EXP dates, Batch No, and MRP.
+  - Usage instructions, composition, and therapeutic purpose.
+- **Skin Condition Analysis**: Analyze images of skin rashes, infections, or other issues for a preliminary assessment and recommended precautions.
+
+### 📍 Advanced Facility Tracker
+- **Smart Proximity Search**: Locate **Hospitals, Pharmacies, and Clinics** within a **25 km radius**.
+- **Major Institute Support**: Specifically optimized to find major complexes using OpenStreetMap data.
+- **One-Tap Navigation**: Integrated Google Maps directions for every result.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Backend**: Flask (Python)
+- **AI/LLM**: Google Gemini 2.0 Flash (`google-genai` SDK)
+- **ML Engine**: Scikit-Learn (SVC - Support Vector Classifier)
+- **Data Handling**: Pandas, NumPy
+- **Frontend**: Vanilla HTML5, CSS3 (Modern Flex/Grid), JavaScript (ES6+)
+- **Map Data**: OpenStreetMap via Overpass API
+
+---
+
+## ⚙️ Setup & Installation
+
+### 1. Prerequisites
+- Python 3.9+
+- A Google Gemini API Key (Get it at [Google AI Studio](https://aistudio.google.com/))
+
+### 2. Configuration
+Create a `.env` file in the root directory:
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-2.0-flash
+```
+
+### 3. Running the App
+- **For the full AI-powered experience** (including Image Analysis & Location Search):
+  ```bash
+  python geminiapp.py
+  ```
+- **For the traditional ML-based version**:
+  ```bash
+  python app.py
+  ```
+
+---
+
+## ⚠️ Disclaimer
+*HealthCheck AI is for informational purposes only and is NOT a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health providers with any questions you may have regarding a medical condition. In case of a medical emergency, call your local emergency services immediately.*
+
+---
+© 2026 HealthCheck AI. All rights reserved.
